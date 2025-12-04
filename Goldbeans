@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>BeanCraft Coffee – Specialty Coffee Beans</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Shop freshly roasted specialty coffee beans. Ethically sourced, small-batch roasted, delivered to your door." />
+  <style>
+    :root {
+      --bg: #0b0a07;
+      --bg-alt: #151310;
+      --accent: #c58b3a;
+      --accent-soft: rgba(197, 139, 58, 0.14);
+      --text: #f5f5f5;
+      --muted: #b5b0a5;
+      --card: #1e1b16;
+      --border: rgba(255, 255, 255, 0.07);
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --radius-pill: 999px;
+      --shadow-soft: 0 22px 60px rgba(0, 0, 0, 0.55);
+      --shadow-subtle: 0 12px 30px rgba(0, 0, 0, 0.45);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1b160f 0, #050403 50%, #000 100%);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px 20px 60px;
+    }
+
+    /* NAVBAR */
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px;
+      margin-bottom: 28px;
+      background: rgba(10, 8, 6, 0.9);
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(16px);
+      position: sticky;
+      top: 14px;
+      z-index: 20;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-circle {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 20%, #f2e3c5 0, #c58b3a 25%, #543822 60%, #1a120c 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 18px;
+      font-weight: 700;
+      box-shadow: var(--shadow-subtle);
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-title {
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      font-size: 13px;
+    }
+
+    .brand-sub {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .nav-link {
+      position: relative;
+      padding-bottom: 2px;
+      cursor: pointer;
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 1px;
+      background: var(--accent);
+      transition: width 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--text);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn {
+      border-radius: var(--radius-pill);
+      font-size: 14px;
+      padding: 9px 20px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.18s ease-out;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: none;
+      color: inherit;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #c58b3a, #f2e3c5);
+      color: #1b1309;
+      font-weight: 600;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 26px 70px rgba(0, 0, 0, 0.7);
+    }
+
+    .btn-outline {
+      border-color: var(--border);
+      background: rgba(15, 12, 9, 0.8);
+      color: var(--muted);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--text);
+      background: rgba(25, 20, 15, 0.9);
+    }
+
+    .nav-toggle {
+      display: none;
+      border: none;
+      background: none;
+      color: var(--text);
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    /* HERO */
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 40px;
+      align-items: center;
+      margin-bottom: 60px;
+    }
+
+    .hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border);
+      background: rgba(22, 19, 15, 0.8);
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .hero-label-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #27ae60;
+      box-shadow: 0 0 0 5px rgba(39, 174, 96, 0.25);
+    }
+
+    .hero-title {
+      font-size: clamp(32px, 4vw, 40px);
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+
+    .hero-title span {
+      background: linear-gradient(135deg, #f7e8c9, #c58b3a);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-text {
+      color: var(--muted);
+      font-size: 15px;
+      max-width: 490px;
+      margin-bottom: 20px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .hero-meta span strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .hero-badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .pill {
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      font-size: 11px;
+      color: var(--muted);
+      background: rgba(16, 13, 10, 0.9);
+    }
+
+    .pill b {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .hero-visual {
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at top, #4a321f 0, #1b130c 40%, #050403 100%);
+      padding: 16px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+      min-height: 260px;
+    }
+
+    .hero-bag {
+      position: absolute;
+      inset: 16px;
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      background: linear-gradient(145deg, rgba(44, 34, 25, 0.9), rgba(13, 9, 6, 0.98));
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      padding: 18px 18px 14px;
+    }
+
+    .hero-bag-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .hero-bag-title {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #f4e7d3;
+    }
+
+    .hero-bag-mid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .bag-illustration {
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 10px;
+      background: radial-gradient(circle at 20% 0%, #f1dfc0 0, #c58b3a 30%, #40281a 70%, #140e09 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bag-illustration-inner {
+      position: absolute;
+      inset: 12px 18px;
+      border-radius: 14px;
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0) 36%),
+        linear-gradient(165deg, rgba(12, 9, 6, 0.3), rgba(0, 0, 0, 0.8));
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(1px);
+    }
+
+    .bag-label {
+      position: absolute;
+      left: 18px;
+      bottom: 22px;
+      padding: 4px 7px;
+      border-radius: 999px;
+      background: rgba(12, 8, 6, 0.85);
+      color: #fcefd9;
+      font-size: 11px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .bag-label-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #c58b3a;
+    }
+
+    .bag-details {
+      font-size: 12px;
+      color: var(--muted);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .bag-details strong {
+      color: var(--text);
+      font-size: 13px;
+    }
+
+    .bag-tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .bag-tag {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(21, 17, 13, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .hero-bag-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 8px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      margin-top: 8px;
+      font-size: 12px;
+    }
+
+    .hero-bag-price {
+      font-weight: 600;
+      color: #f5e4c5;
+    }
+
+    .hero-bag-bottom small {
+      color: var(--muted);
+    }
+
+    /* SECTION GENERIC */
+
+    section {
+      margin-bottom: 64px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .section-title-block h2 {
+      font-size: 22px;
+      margin-bottom: 4px;
+    }
+
+    .section-title-block p {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .section-note {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* PRODUCTS */
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      padding: 14px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-subtle);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 250px;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 6px;
+      gap: 10px;
+    }
+
+    .card-badge {
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: var(--radius-pill);
+      background: var(--accent-soft);
+      color: #f1dfc0;
+      border: 1px solid rgba(197, 139, 58, 0.4);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .card-subtitle {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .card-tag {
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: var(--radius-pill);
+      background: rgba(18, 15, 12, 0.9);
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+
+    .card-foot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .card-price {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .card-price-main {
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .card-price-sub {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .card .btn {
+      font-size: 13px;
+      padding: 7px 14px;
+    }
+
+    /* ABOUT */
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+      gap: 28px;
+    }
+
+    .about-text {
+      font-size: 14px;
+      color: var(--muted);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .about-list {
+      list-style: none;
+      margin-top: 6px;
+    }
+
+    .about-list li {
+      margin-bottom: 6px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .about-list li span {
+      margin-top: 3px;
+      font-size: 16px;
+    }
+
+    .about-card-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .about-card {
+      background: var(--card);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      padding: 12px 13px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .about-card strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--text);
+      font-size: 13px;
+    }
+
+    /* SUBSCRIBE / CONTACT */
+
+    .cta-panel {
+      background: var(--bg-alt);
+      border-radius: var(--radius-lg);
+      padding: 18px 18px 16px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-subtle);
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 18px;
+      align-items: center;
+    }
+
+    .cta-panel h3 {
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+
+    .cta-panel p {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .cta-form {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .input-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .input {
+      flex: 1 1 180px;
+      min-width: 0;
+      padding: 9px 12px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border);
+      background: rgba(5, 4, 3, 0.9);
+      color: var(--text);
+      font-size: 13px;
+      outline: none;
+    }
+
+    .input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(197, 139, 58, 0.35);
+    }
+
+    .small-note {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    /* FOOTER */
+
+    footer {
+      margin-top: 40px;
+      padding-top: 14px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.12);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    footer a {
+      text-decoration: underline;
+      text-decoration-color: rgba(197, 139, 58, 0.7);
+      text-underline-offset: 3px;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .hero-visual {
+        order: -1;
+      }
+      .products-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .cta-panel {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .nav {
+        padding-inline: 14px;
+      }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 58px;
+        right: 20px;
+        flex-direction: column;
+        background: rgba(7, 6, 5, 0.98);
+        border-radius: 14px;
+        padding: 10px 14px;
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow-soft);
+      }
+      .nav-links.open {
+        display: flex;
+      }
+      .nav-toggle {
+        display: block;
+      }
+      .nav-cta {
+        display: none;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        padding-inline: 16px;
+      }
+      .products-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .about-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .nav {
+        border-radius: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- NAVBAR -->
+    <header class="nav">
+      <div class="nav-left">
+        <div class="logo-circle">B</div>
+        <div class="brand">
+          <div class="brand-title">BeanCraft Coffee</div>
+          <div class="brand-sub">Freshly roasted beans only</div>
+        </div>
+      </div>
+      <nav class="nav-links" id="navLinks">
+        <a class="nav-link" href="#shop">Shop beans</a>
+        <a class="nav-link" href="#about">Our story</a>
+        <a class="nav-link" href="#subscribe">Wholesale & updates</a>
+      </nav>
+      <div class="nav-cta">
+        <button class="btn btn-outline" onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})">
+          View coffees
+        </button>
+        <button class="btn btn-primary" onclick="document.getElementById('subscribe').scrollIntoView({behavior:'smooth'})">
+          Join coffee list
+          <span>→</span>
+        </button>
+      </div>
+      <button class="nav-toggle" aria-label="Toggle navigation" onclick="toggleNav()">☰</button>
+    </header>
+
+    <!-- HERO -->
+    <main>
+      <section class="hero">
+        <div>
+          <div class="hero-label">
+            <span class="hero-label-dot"></span>
+            Freshly roasted this week · Ships in 24h
+          </div>
+          <h1 class="hero-title">
+            Specialty coffee beans,<br />
+            roasted to highlight <span>origin & flavor</span>.
+          </h1>
+          <p class="hero-text">
+            BeanCraft Coffee brings you carefully sourced Arabica beans from single-origin farms.
+            Small-batch roasting, clear flavor notes, and transparent sourcing – so every cup actually tastes like the place it came from.
+          </p>
+          <div class="hero-actions">
+            <button class="btn btn-primary" onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})">
+              Shop our beans
+            </button>
+            <button class="btn btn-outline" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
+              Learn about our roasting
+            </button>
+          </div>
+          <div class="hero-meta">
+            <span><strong>250 g & 1 kg</strong> bags available</span>
+            <span><strong>Free shipping</strong> on orders over $40</span>
+            <span><strong>Roasted to order</strong> in small batches</span>
+          </div>
+          <div class="hero-badge-row">
+            <div class="pill"><b>Ethically sourced</b> from independent farmers</div>
+            <div class="pill">No capsules, <b>only whole beans</b></div>
+          </div>
+        </div>
+        <aside class="hero-visual" aria-hidden="true">
+          <div class="hero-bag">
+            <div class="hero-bag-top">
+              <span>Featured roast</span>
+              <span>Lot #042</span>
+            </div>
+            <div class="hero-bag-mid">
+              <div class="bag-illustration">
+                <div class="bag-illustration-inner"></div>
+                <div class="bag-label">
+                  <span class="bag-label-dot"></span>
+                  Single-origin · Washed
+                </div>
+              </div>
+              <div class="bag-details">
+                <strong>Ethiopia · Guji</strong>
+                <div>Floral aroma, stone fruit sweetness, silky body.</div>
+                <div class="bag-tag-row">
+                  <span class="bag-tag">Notes: peach, jasmine, bergamot</span>
+                  <span class="bag-tag">Light–medium roast</span>
+                  <span class="bag-tag">Best for filter & pour-over</span>
+                </div>
+              </div>
+            </div>
+            <div class="hero-bag-bottom">
+              <div>
+                <div class="hero-bag-price">$17.00</div>
+                <small>250 g · Ships tomorrow</small>
+              </div>
+              <button class="btn btn-primary" style="font-size: 12px; padding: 6px 10px;">
+                Add to cart
+              </button>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <!-- PRODUCTS -->
+      <section id="shop">
+        <div class="section-header">
+          <div class="section-title-block">
+            <h2>Our coffees</h2>
+            <p>We roast every week in small batches. Choose the profile that matches your taste.</p>
+          </div>
+          <div class="section-note">
+            All coffees are shipped as <strong>whole beans</strong> to keep them fresh longer.
+          </div>
+        </div>
+
+        <div class="products-grid">
+          <!-- Product 1 -->
+          <article class="card">
+            <div>
+              <div class="card-header">
+                <div>
+                  <div class="card-title">Ethiopia Guji Bloom</div>
+                  <div class="card-subtitle">Light roast · Floral & fruity</div>
+                </div>
+                <span class="card-badge">Best seller</span>
+              </div>
+              <div class="card-tags">
+                <span class="card-tag">Notes: jasmine, peach, bergamot</span>
+                <span class="card-tag">Altitude: 1,900–2,100 m</span>
+                <span class="card-tag">Process: washed</span>
+              </div>
+            </div>
+            <div class="card-foot">
+              <div class="card-price">
+                <span class="card-price-main">$17.00</span>
+                <span class="card-price-sub">250 g · Filter & pour-over</span>
+              </div>
+              <button class="btn btn-outline">Add to cart</button>
+            </div>
+          </article>
+
+          <!-- Product 2 -->
+          <article class="card">
+            <div>
+              <div class="card-header">
+                <div>
+                  <div class="card-title">Brazil Serra Classic</div>
+                  <div class="card-subtitle">Medium roast · Sweet & balanced</div>
+                </div>
+                <span class="card-badge">New crop</span>
+              </div>
+              <div class="card-tags">
+                <span class="card-tag">Notes: milk chocolate, nuts, caramel</span>
+                <span class="card-tag">Perfect for espresso & moka</span>
+                <span class="card-tag">Low acidity</span>
+              </div>
+            </div>
+            <div class="card-foot">
+              <div class="card-price">
+                <span class="card-price-main">$15.00</span>
+                <span class="card-price-sub">250 g · Great for milk drinks</span>
+              </div>
+              <button class="btn btn-outline">Add to cart</button>
+            </div>
+          </article>
+
+          <!-- Product 3 -->
+          <article class="card">
+            <div>
+              <div class="card-header">
+                <div>
+                  <div class="card-title">House Blend Nightshift</div>
+                  <div class="card-subtitle">Dark roast · Rich & intense</div>
+                </div>
+                <span class="card-badge">Bold</span>
+              </div>
+              <div class="card-tags">
+                <span class="card-tag">Notes: dark chocolate, spice, smoke</span>
+                <span class="card-tag">Ideal for espresso machines</span>
+                <span class="card-tag">Works well with sugar & milk</span>
+              </div>
+            </div>
+            <div class="card-foot">
+              <div class="card-price">
+                <span class="card-price-main">$16.00</span>
+                <span class="card-price-sub">250 g · Espresso & cold brew</span>
+              </div>
+              <button class="btn btn-outline">Add to cart</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ABOUT -->
+      <section id="about">
+        <div class="section-header">
+          <div class="section-title-block">
+            <h2>How we roast & source</h2>
+            <p>We keep our process simple and transparent – so you always know what’s in your cup.</p>
+          </div>
+        </div>
+        <div class="about-grid">
+          <div class="about-text">
+            <p>
+              BeanCraft Coffee is a small roastery focused on specialty-grade Arabica beans.
+              We work with importers and small farms that care about fair pay, careful processing, and long-term relationships.
+            </p>
+            <p>
+              Every batch is roasted to highlight the character of its origin. No “one roast fits all” approach,
+              no burnt flavors – just clean, honest coffee that actually tastes like coffee.
+            </p>
+            <ul class="about-list">
+              <li>
+                <span>✓</span>
+                <div>Only specialty-grade Arabica beans, cupped and scored before we buy.</div>
+              </li>
+              <li>
+                <span>✓</span>
+                <div>Roasted in small batches and rested for 24–72 hours before shipping.</div>
+              </li>
+              <li>
+                <span>✓</span>
+                <div>Clear information on origin, process, and flavor notes on every bag.</div>
+              </li>
+            </ul>
+          </div>
+          <div class="about-card-row">
+            <div class="about-card">
+              <strong>Perfect for home brewers</strong>
+              From simple French press to V60, Aeropress, Chemex,
+              our light and medium roasts are designed to be easy to dial in at home,
+              without a professional machine.
+            </div>
+            <div class="about-card">
+              <strong>Wholesale & coffee shops</strong>
+              We also roast larger batches for cafés, offices, and small businesses.
+              Consistent profiles, easy communication, and support with brew recipes.
+            </div>
+            <div class="about-card">
+              <strong>Freshness first</strong>
+              We never ship coffee that’s been sitting on a shelf for months.
+              Your beans are roasted shortly before we pack and send them out.
+            </div>
+            <div class="about-card">
+              <strong>Sustainable choices</strong>
+              Our bags are recyclable where facilities exist, and we prioritize partners
+              who focus on environmental and social responsibility at origin.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SUBSCRIBE / CONTACT -->
+      <section id="subscribe">
+        <div class="cta-panel">
+          <div>
+            <h3>Stay in the loop with new coffees & limited roasts</h3>
+            <p>
+              Sign up to receive updates about fresh harvests, limited lots, and small experimental batches.
+              No spam, just coffee news 2–3 times a month.
+            </p>
+          </div>
+          <form class="cta-form" onsubmit="event.preventDefault(); alert('Thank you! We will keep you updated about new coffees.');">
+            <div class="input-row">
+              <input class="input" type="text" name="name" placeholder="Your name" required />
+              <input class="input" type="email" name="email" placeholder="Email address" required />
+            </div>
+            <button class="btn btn-primary" type="submit">
+              Join newsletter
+            </button>
+            <div class="small-note">
+              For wholesale or bulk orders, write to:
+              <strong>hello@beancraft.coffee</strong>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+      <div>© <span id="year"></span> BeanCraft Coffee · All rights reserved.</div>
+      <div>Roasted with care · Crafted for people who actually taste their coffee.</div>
+      <div>
+        Questions? Email <a href="mailto:hello@beancraft.coffee">hello@beancraft.coffee</a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Mobile nav toggle
+    function toggleNav() {
+      const nav = document.getElementById('navLinks');
+      nav.classList.toggle('open');
+    }
+
+    // Current year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
